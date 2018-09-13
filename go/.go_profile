@@ -1,0 +1,6 @@
+export LESSCHARSET=utf-8
+export GOLANG=$HOME/golang
+export GOROOT=$GOLANG/go
+export GOBIN=$GOROOT/bin
+export GOPATH=$GOLANG/proj
+PATH=$PATH:$GOPATH/bin:$GOBIN

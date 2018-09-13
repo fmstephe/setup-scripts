@@ -1,0 +1,52 @@
+# Git
+alias gst="git status"
+alias gco="git checkout"
+alias gcm="git commit"
+alias gbr="git branch -vv"
+alias glg="git log --pretty=format:'%C(dim yellow)<%an> (%cr) %C(red)%h %C(dim white)%d%n%n%C(blue)%s%n%n%Creset%b%Creset%n'"
+alias glgr="git log --graph --pretty=format:'%C(dim yellow)<%an> (%cr) %C(red)%h %C(dim white)%d%n%n%C(blue)%s%n%n%Creset%b%Creset%n'"
+alias grp="git grep"
+alias gam_fpush="git commit -a --amend --no-edit && git push -f"
+alias gdu="git diff @{upstream}"
+alias gdf="clear && git diff ./"
+alias grc="git rebase --continue"
+alias grs="git rebase --skip"
+alias gra="git rebase --abort"
+alias gfrm="git fetch && git rebase origin/master"
+alias gsh="git show HEAD"
+alias gshn="git show HEAD --name-only"
+alias grec="git reflog | egrep -io 'moving from ([^[:space:]]+)' | awk '{ print \$3 }' | awk ' !seen[\$0]++' | head -n10"
+alias gdc="git log origin/master..HEAD --pretty=format:'%s' | sort | uniq -d"
+
+function clearGone() {
+        for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do
+                echo "Delete $branch?"
+                select yn in "Yes" "No"; do
+                        case $yn in
+                                Yes ) git branch -D $branch; break;;
+                                No ) ;;
+                        esac
+                done
+        done
+}
+
+function grb() {
+        MISSING=`git cherry -v HEAD origin/master`
+        if [ "${MISSING}" != "" ]; then
+                echo "${BRANCH} is not ahead of origin/master"
+                echo "Please fetch and rebase"
+        else
+                git rebase -i origin/master
+        fi
+}
+
+function pushCosmeticRebase() {
+        DIFF=$(git diff @{upstream})
+        if [ "$DIFF" == "" ]
+        then
+                git push -f
+        else
+                echo "Can't push, branch differs from upstream"
+                echo $DIFF
+        fi
+}

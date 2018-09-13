@@ -1,0 +1,15 @@
+#Misc
+alias hig="history | grep "
+alias fswp="find ~/ -name '*.swp'"
+alias lll="ls -1"
+alias lln="ls -1 | grep"
+alias ll="ls -l"
+
+repeat() {
+        n=$1
+        shift
+        while [ $(( n -= 1 )) -ge 0 ]
+        do
+                "$@"
+        done
+}

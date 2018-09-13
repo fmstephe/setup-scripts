@@ -1,0 +1,82 @@
+# Golang
+function psrc() {
+        cd $GOPATH/src/github.com/fmstephe
+}
+
+# Golang Src
+function gsrc() {
+        cd $GOROOT/src
+}
+
+function gr() {
+        find . -name 'vendor' -prune -o -name '*.go' -print | xargs sed -i "" -e 's/$1/$2/g'
+}
+
+function grpl() {
+        grep -nrI --color=always --exclude-dir="\.git" $1 . | less -R
+}
+
+function srcg() {
+        grep -nr -I --color=always --exclude-dir="\.git" --include=*.go --exclude=*_test.go $1 .
+}
+
+function srcgl() {
+        grep -nr -I --color=always --exclude-dir="\.git" --include=*.go --exclude=*_test.go $1 . | less -R
+}
+
+function cnfg() {
+        grep -nr -I --color=always --exclude-dir="\.git" --include=*.yml $1 .
+}
+
+function cnfgl() {
+        grep -nr -I --color=always --exclude-dir="\.git" --include=*.yml $1 . | less -R
+}
+
+function tstg() {
+        grep -nr -I --color=always --exclude-dir="\.git" --include=*_test.go $1 .
+}
+
+function tstgl() {
+        grep -nr -I --color=always --exclude-dir="\.git" --include=*_test.go $1 . | less -R
+}
+
+# Go
+alias buildTests="go test ./... -run a^"
+alias gobuild="clear && go build ./..."
+alias gotest="clear && go test ./..."
+function dependantPackages() {
+        OUTPUT=`go list -f {{.Deps}}`
+        LINES=( $OUTPUT )
+        printf "%s\n" "${LINES[@]}"
+}
+
+# Profiling
+alias web_heap="pprof --http :8081 -source_path /Users/fmstephe/golang/proj -alloc_objects heap"
+alias web_prof="pprof --http :8081 -source_path /Users/fmstephe/golang/proj profile"
+
+# Vim fuzzy search and open
+function fv() {
+        search=$(echo $1 | cut -f1 -d:)
+        line=$(echo $1 | cut -f2 -d:)
+        if [ "$search" == "$line"  ]
+        then
+                line=""
+        fi
+        path=""
+        if [ "$search" != ""  ]
+        then
+                path=$(fzf -q $search)
+        else
+                path=$(fzf)
+        fi
+        if [ "$path" == ""  ]
+        then
+                return
+        fi
+        if [ "$line" == "" ]
+        then
+                vim $path
+        else
+                vim +$line $path
+        fi
+}

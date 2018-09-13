@@ -9,6 +9,10 @@ case $- in
 esac
 
 # Source all the files
-for f in ~/.bashrc_dir/*; do source $f; done
+for f in ~/.bashrc_dir/.*; do 
+	if [ -f $f ]; then
+		source $f; 
+	fi
+done
 
 source ~/.bash_aliases

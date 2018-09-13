@@ -9,6 +9,10 @@
 #umask 022
 
 # Source all the files
-for f in ~/.profile_dir/*; do source $f; done
+for f in ~/.profile_dir/.*; do 
+	if [ -f $f ]; then
+		source $f; 
+	fi
+done
 
 source ~/.bash_aliases

@@ -17,4 +17,10 @@ popd
 pushd i3
 ./all.sh 
 popd
+pushd go
+./all.sh 
+popd
+pushd docker
+./all.sh 
+popd
 #./go/all.sh 

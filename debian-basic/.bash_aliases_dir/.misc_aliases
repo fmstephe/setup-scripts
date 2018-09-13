@@ -13,3 +13,13 @@ repeat() {
                 "$@"
         done
 }
+
+function psg() {
+	ps -ef | grep $1
+}
+
+function rnet() {
+	sudo ifdown eth0
+	sleep 1
+	sudo ifup eth0
+}

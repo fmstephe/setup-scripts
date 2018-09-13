@@ -3,4 +3,4 @@
 cp -r .i3/ ~/
 cp -r .gconf/ ~/
 cp -r .config/ ~/
-cp .i3_bashrc ~/bashrc_dir
+cp .i3_bashrc ~/.bashrc_dir

@@ -14,4 +14,7 @@ popd
 pushd vim
 ./all.sh 
 popd
+pushd i3
+./all.sh 
+popd
 #./go/all.sh 

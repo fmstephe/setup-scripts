@@ -14,15 +14,6 @@ popd
 pushd vim
 ./all.sh 
 popd
-pushd i3
-./all.sh 
-popd
-pushd go
-./all.sh 
-popd
-pushd docker
-./all.sh 
-popd
 pushd kafka
 ./all.sh 
 popd

@@ -9,3 +9,4 @@ sudo apt-get --assume-yes install libncurses5-dev
 sudo apt-get --assume-yes install tree
 sudo apt-get --assume-yes install zip
 sudo apt-get --assume-yes install htop
+sudo apt-get --assume-yes install openssh-server
